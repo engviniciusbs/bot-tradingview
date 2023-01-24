@@ -1,0 +1,37 @@
+// Variáveis
+length_sma = 50
+length_rsi = 14
+length_macd = 12
+length_signal = 26
+length_stoch = 14
+length_k = 3
+length_d = 3
+length_atr = 14
+length_bb = 20
+asset = close
+
+// Cálculo dos indicadores
+sma = sma(asset, length_sma)
+rsi = rsi(asset, length_rsi)
+macd, signal, hist = macd(asset, length_macd, length_signal)
+stoch_k, stoch_d = stoch(asset, length_stoch, length_k, length_d)
+atr = atr(length_atr)
+bb_upper, bb_middle, bb_lower = bbands(asset, length_bb)
+
+// Regras de entrada
+entry_rule1 = asset > sma and rsi < 30 and macd > signal and stoch_k < 20
+entry_rule2 = asset > bb_upper and rsi < 50
+entry_rule3 = asset > sma and atr > 1.5 * avg(atr)
+
+// Regras de saída
+exit_rule1 = asset < sma or rsi > 70 or macd < signal or stoch_k > 80
+exit_rule2 = asset < bb_lower or rsi > 70
+exit_rule3 = asset < sma and atr > 1.5 * avg(atr)
+
+// Estratégia de compra
+if entry_rule1 or entry_rule2 or entry_rule3
+    strategy.entry("Buy", strategy.long)
+
+// Estratégia de venda
+if exit_rule1 or exit_rule2 or exit_rule3
+    strategy.close("Buy")

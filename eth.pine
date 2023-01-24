@@ -1,0 +1,16 @@
+// Variáveis
+length = 100
+eth = close
+
+// Cálculo da média móvel
+eth_ma = sma(eth, length)
+
+// Estratégia de compra
+if eth < eth_ma
+    strategy.entry("Buy", strategy.long)
+
+// Estratégia de venda
+if eth > eth_ma
+    strategy.close("Buy")
+
+// -------------------------------- //

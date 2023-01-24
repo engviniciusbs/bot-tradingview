@@ -1,0 +1,16 @@
+// Variáveis
+length = 14
+ada = close
+
+// Cálculo do RSI
+ada_rsi = rsi(ada, length)
+
+// Estratégia de long
+if ada_rsi < 30
+    strategy.entry("Long", strategy.long)
+
+// Estratégia de short
+if ada_rsi > 70
+    strategy.entry("Short", strategy.short)
+
+// -------------------------------- //

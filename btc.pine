@@ -1,0 +1,18 @@
+// BTC
+
+// Variáveis
+length = 100
+btc = close
+
+// Cálculo da média móvel
+btc_ma = sma(btc, length)
+
+// Estratégia de compra
+if btc < btc_ma
+    strategy.entry("Buy", strategy.long)
+
+// Estratégia de venda
+if btc > btc_ma
+    strategy.close("Buy")
+
+// -------------------------------- //

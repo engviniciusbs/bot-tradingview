@@ -1,0 +1,16 @@
+// Variáveis
+length = 14
+asset = close
+
+// Cálculo do RSI
+rsi = rsi(asset, length)
+
+// Estratégia de long
+if rsi < 30
+    strategy.entry("Long", strategy.long)
+
+// Estratégia de short
+if rsi > 70
+    strategy.entry("Short", strategy.short)
+
+// -------------------------------- //

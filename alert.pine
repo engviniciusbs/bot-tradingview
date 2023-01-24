@@ -1,0 +1,25 @@
+// Variáveis
+count_profit = 0
+count_loss = 0
+
+// Loop para cada barra
+for i = 0 to bar_index
+    if strategy.position_size > 0
+        // Verifica se a posição é lucrativa ou não
+        if strategy.profit_loss(i) > 0
+            count_profit := count_profit + 1
+        else
+            count_loss := count_loss + 1
+            
+    // Cálculo da taxa de acerto
+    accuracy = count_profit / (count_profit + count_loss)
+    
+    // Verifica se a taxa de acerto é maior que 50%
+    if accuracy > 0.5
+        // Encerra todas as posições abertas
+        strategy.close_all()
+    else
+        // Envia um alerta
+        alert("Taxa de acerto abaixo de 50%")
+
+// -------------------------------- //
